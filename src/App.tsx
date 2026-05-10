@@ -29,7 +29,7 @@ export default function App() {
           className="text-3xl font-black tracking-[0.2em] uppercase"
           style={{ fontFamily: "'Clear Sans', 'Helvetica Neue', Arial, sans-serif" }}
         >
-          BigWordle
+          It Could be Donkey!
         </h1>
       </header>
 
