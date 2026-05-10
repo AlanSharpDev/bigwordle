@@ -105,7 +105,7 @@ export function useWordle(): WordleState {
       setTimeout(() => setBouncingRow(false), 1000);
       setGameStatus('won');
     } else if (newGuesses.length >= MAX_GUESSES) {
-      showMessage(targetWord.toUpperCase(), 4000);
+      showMessage('Hard luck!', 2000);
       setGameStatus('lost');
     }
   }, [currentGuess, guesses, targetWord, showMessage, triggerShake]);

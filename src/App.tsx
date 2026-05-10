@@ -7,6 +7,7 @@ const MAX_GUESSES = 6;
 
 export default function App() {
   const {
+    targetWord,
     guesses,
     currentGuess,
     gameStatus,
@@ -69,12 +70,28 @@ export default function App() {
             </div>
 
             {gameOver && (
-              <button
-                onClick={newGame}
-                className="bg-[#538d4e] hover:bg-[#6aaa64] active:bg-[#538d4e] text-white font-bold py-3 px-8 rounded-lg text-base tracking-wider uppercase transition-colors"
-              >
-                New Game
-              </button>
+              <div className="flex flex-col items-center gap-3">
+                <div className="text-center">
+                  <p className="text-zinc-400 text-sm uppercase tracking-widest mb-1">
+                    {gameStatus === 'won' ? 'You got it!' : 'The word was'}
+                  </p>
+                  <a
+                    href={`https://www.dictionary.com/browse/${targetWord}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-3xl font-black uppercase tracking-widest text-white hover:text-yellow-300 underline underline-offset-4 transition-colors"
+                  >
+                    {targetWord}
+                  </a>
+                  <p className="text-zinc-500 text-xs mt-1">click to look it up</p>
+                </div>
+                <button
+                  onClick={newGame}
+                  className="bg-[#538d4e] hover:bg-[#6aaa64] active:bg-[#538d4e] text-white font-bold py-3 px-8 rounded-lg text-base tracking-wider uppercase transition-colors"
+                >
+                  New Game
+                </button>
+              </div>
             )}
 
             <Keyboard keyStatuses={keyStatuses} onKey={handleKey} />
