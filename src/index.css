@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #121213;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tile-container {
+  perspective: 250px;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #3a3a3c;
+  font-weight: 700;
+  text-transform: uppercase;
+  user-select: none;
+  transition: border-color 0.05s;
+  transform-style: preserve-3d;
+  will-change: transform;
+  color: white;
+  font-size: clamp(14px, 2.5vw, 24px);
+}
+
+.tile.empty {
+  border-color: #3a3a3c;
+  background: transparent;
+}
+
+.tile.tbd {
+  border-color: #999;
+  background: transparent;
+  animation: tile-pop 0.1s ease-in-out;
+}
+
+.tile.revealed {
+  animation: tile-flip 0.5s ease-in-out forwards;
+}
+
+.tile.correct { --tile-bg: #538d4e; }
+.tile.present { --tile-bg: #c97c2e; }
+.tile.absent  { --tile-bg: #3a3a3c; }
+
+@keyframes tile-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes tile-flip {
+  0%   { transform: rotateX(0deg); }
+  49%  { transform: rotateX(-90deg); }
+  50%  { transform: rotateX(-90deg); background-color: var(--tile-bg); border-color: var(--tile-bg); }
+  100% { transform: rotateX(0deg);   background-color: var(--tile-bg); border-color: var(--tile-bg); }
+}
+
+@keyframes row-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-8px); }
+  80%       { transform: translateX(8px); }
+}
+
+@keyframes row-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-20px); }
+  70%       { transform: translateY(-10px); }
+}
+
+.row-shake {
+  animation: row-shake 0.4s ease-in-out;
+}
+
+.row-bounce .tile {
+  animation: row-bounce 0.9s ease-in-out;
+}
+
+.row-bounce .tile:nth-child(2) { animation-delay: 0.1s; }
+.row-bounce .tile:nth-child(3) { animation-delay: 0.2s; }
+.row-bounce .tile:nth-child(4) { animation-delay: 0.3s; }
+.row-bounce .tile:nth-child(5) { animation-delay: 0.4s; }
+.row-bounce .tile:nth-child(6) { animation-delay: 0.5s; }
