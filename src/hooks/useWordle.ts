@@ -117,7 +117,7 @@ export function useWordle(): WordleState {
       submitGuess();
     } else if (key === 'Backspace') {
       setCurrentGuess(prev => prev.slice(0, -1));
-    } else if (/^[a-zA-Z]$/.test(key) && currentGuess.length < 20) {
+    } else if (/^[a-zA-Z]$/.test(key) && currentGuess.length < 30) {
       setCurrentGuess(prev => prev + key.toLowerCase());
     }
   }, [gameStatus, submitGuess, currentGuess.length]);
